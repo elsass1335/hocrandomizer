@@ -53,24 +53,28 @@ north.push(...n5)
 north.push(...n6)
 
 randomizer = []
-check = []
+supnum = []
 
 function supply_select(){
-    for(let i=1;i<11;i++){
-        while(true){
-            var x = Math.floor(Math.random()*(max-1) + 0);
-            if(!check.includes(x)){
-                break;
-            }
-        }
-        supply.push(randomizer[x])
-        check.push(x)
+    var arr = [];
+    supnum.length = 0
+    for(var i=0; i<max; i++){
+        arr[i]=i
+    }
+    
+    for(let len = arr.length, j=0 ; j<10; j++, len--){
+        x = Math.floor(Math.random()*len);
+        supnum.push(arr[x])
+        supply.push(randomizer[arr[x]]);
+        arr[x] = arr[len-1];
+        
     }
 }
 
 function basic_supply(){  
     supply.length = 0
-    randomizer.push(...basic)
+    randomizer.length = 0
+    randomizer.push(...basic);
     max = randomizer.length
     supply_select();
     document.getElementById("card_basic").innerHTML = supply;
@@ -78,8 +82,9 @@ function basic_supply(){
 
 function east_supply(){
     supply.length = 0
-    randomizer.push(...basic)
-    randomizer.push(...east)
+    randomizer.length = 0
+    randomizer.push(...basic);
+    randomizer.push(...east);
     max = randomizer.length
     supply_select();
     document.getElementById("card_east").innerHTML = supply;
@@ -87,9 +92,10 @@ function east_supply(){
 
 function north_supply(){
     supply.length = 0
-    randomizer.push(...basic)
-    randomizer.push(...east)
-    randomizer.push(...north)
+    randomizer.length = 0
+    randomizer.push(...basic);
+    randomizer.push(...east);
+    randomizer.push(...north);
     max = randomizer.length
     supply_select();
     document.getElementById("card_north").innerHTML = supply;
